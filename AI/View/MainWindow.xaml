@@ -1,0 +1,270 @@
+﻿<Window x:Class="AI.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AI.View"
+        xmlns:viewModels="clr-namespace:AI.ViewModels"
+        mc:Ignorable="d"
+        Title="OpenRouter Client" Height="850" Width="1200">
+
+    <Window.DataContext>
+        <viewModels:MainViewModel/>
+    </Window.DataContext>
+    
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left panel: Model selection -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="350"/>
+            </Grid.RowDefinitions>
+
+            <!-- Selected model info -->
+            <Border Grid.Row="0"
+                    Background="#2196F3"
+                    CornerRadius="5"
+                    Padding="10,8"
+                    Margin="0,0,0,10">
+                <TextBlock Text="{Binding SelectedModelInfo}"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           FontSize="14"
+                           HorizontalAlignment="Left"
+                           TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- Load models button -->
+            <Button Grid.Row="1" 
+                    Content="REFRESH MODEL LIST" 
+                    Command="{Binding GetModelsCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"
+                    Padding="10,5"
+                    Margin="0,0,0,10"/>
+
+            <!-- Free filter -->
+            <CheckBox Grid.Row="2"
+                      Content="Show only free models"
+                      IsChecked="{Binding ShowFreeOnly}"
+                      Margin="0,0,0,10"/>
+
+            <!-- Available models label -->
+            <TextBlock Grid.Row="4" 
+                       Text="Available models:" 
+                       FontWeight="Bold"
+                       FontSize="13"
+                       Margin="0,0,0,5"/>
+
+            <!-- Models list -->
+            <ListBox Grid.Row="5"
+                     ItemsSource="{Binding FilteredModels}"
+                     SelectedItem="{Binding SelectedModel}"
+                     DisplayMemberPath="Name"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     Margin="0,0,0,10"
+                     BorderBrush="LightGray"
+                     BorderThickness="1">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="2"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#E3F2FD"/>
+                                <Setter Property="BorderBrush" Value="#2196F3"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+            <!-- Selected model details -->
+            <Border Grid.Row="6" 
+                    BorderBrush="LightGray" 
+                    BorderThickness="0" 
+                    CornerRadius="5"
+                    Padding="10"
+                    >
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" 
+                               Text="Model Information:" 
+                               FontWeight="Bold"
+                               FontSize="13"
+                               Margin="0,0,0,5"/>
+
+                    <TextBlock Grid.Row="1" 
+                               Text="{Binding SelectedModel.Name, StringFormat='Model: {0}'}" 
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Grid.Row="2" 
+                               Text="{Binding SelectedModel.Provider, StringFormat='Provider: {0}'}"
+                               Margin="0,2,0,0"/>
+
+                    <TextBlock Grid.Row="3" 
+                               Text="{Binding SelectedModel.ContextLength, StringFormat='Context: {0}'}"
+                               Margin="0,2,0,0"/>
+
+                    <TextBlock Grid.Row="4" 
+                               Text="{Binding SelectedModel.PricingInfo, StringFormat='Pricing: {0}'}"
+                               Margin="0,2,0,0"
+                               Foreground="{Binding SelectedModel.IsFree, Converter={StaticResource FreeToColorConverter}}"/>
+
+                    <TextBox Grid.Row="5" 
+                 Text="{Binding SelectedModel.Description}"
+                 IsReadOnly="True"
+                 TextWrapping="Wrap"
+                 VerticalScrollBarVisibility="Auto"
+                 HorizontalScrollBarVisibility="Disabled"
+                 BorderThickness="0"
+                 Background="Transparent"
+                 Margin="0,5,0,0"
+                 FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType=Window}}">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TextBox">
+                                            <ScrollViewer x:Name="PART_ContentHost"
+                                              VerticalScrollBarVisibility="Auto"
+                                              HorizontalScrollBarVisibility="Disabled"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- First divider -->
+        <GridSplitter Grid.Column="1" 
+                      Width="0" 
+                      HorizontalAlignment="Stretch" 
+                      Background="LightGray"/>
+
+        <!-- Middle panel: Query and response -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+
+            <!-- Response output -->
+            <RichTextBox Grid.Row="0" 
+                 x:Name="ResponseRichTextBox"
+                 IsReadOnly="True"
+                 VerticalScrollBarVisibility="Auto"
+                 Background="#FFF5F5F5"
+                 BorderBrush="LightGray"
+                 BorderThickness="0"
+                 FontSize="13">
+                <RichTextBox.Template>
+                    <ControlTemplate TargetType="RichTextBox">
+                        <Border x:Name="border" 
+                            Background="White"
+                            BorderBrush="LightGray"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                              Margin="3"
+                              VerticalAlignment="Stretch"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#2196F3"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </RichTextBox.Template>
+                <RichTextBox.Resources>
+                    <Style TargetType="Paragraph">
+                        <Setter Property="Margin" Value="0,0,0,5"/>
+                    </Style>
+                </RichTextBox.Resources>
+                <RichTextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Command="ApplicationCommands.Copy"/>
+                        <MenuItem Header="Select All" Command="ApplicationCommands.SelectAll"/>
+                        <Separator/>
+                        <MenuItem Header="Copy as Text" Click="CopyAsText_Click"/>
+                    </ContextMenu>
+                </RichTextBox.ContextMenu>
+            </RichTextBox>
+
+            <!-- Query header -->
+            <TextBlock Grid.Row="1" 
+                       Text="Message:" 
+                       FontWeight="Bold"
+                       FontSize="13"
+                       Margin="0,10,0,5"/>
+
+            <!-- Query input with Enter/Shift+Enter handling -->
+            <TextBox Grid.Row="2" 
+                 x:Name="InputTextBox"
+                 Text="{Binding InputText, UpdateSourceTrigger=PropertyChanged}"
+                 TextWrapping="Wrap" 
+                 AcceptsReturn="True" 
+                 AcceptsTab="True"
+                 VerticalScrollBarVisibility="Auto"
+                 Margin="0,0,0,0"
+                 FontSize="13"
+                 PreviewKeyDown="InputTextBox_PreviewKeyDown">
+                
+                <TextBox.Template>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                            Background="White"
+                            BorderBrush="LightGray"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost" 
+                              Margin="3"
+                              VerticalAlignment="Stretch"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#2196F3"/>
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </TextBox.Template>
+
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="ApplicationCommands.Cut"/>
+                        <MenuItem Command="ApplicationCommands.Copy"/>
+                        <MenuItem Command="ApplicationCommands.Paste"/>
+                        <Separator/>
+                        <MenuItem Command="ApplicationCommands.SelectAll"/>
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
+        </Grid>
+
+    </Grid>
+</Window>
