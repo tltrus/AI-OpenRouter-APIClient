@@ -62,9 +62,4 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 - Lists: Use -, *, or + for bullet lists, 1. for numbered lists
 - Headers: Use ### for section headers
 
-🙏 **Acknowledgments**
-- OpenRouter for providing API access to multiple AI models
-- All AI model providers available through OpenRouter
-- The WPF and .NET communities for excellent tools and libraries
-
 Note: This application requires an internet connection and a valid OpenRouter API key. Some models may have usage limits or costs associated with them.
