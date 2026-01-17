@@ -29,6 +29,7 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 - **Configure API Key**
    - Get your API key from OpenRouter
    - Replace the API key in MainViewModel.cs
+   - <img width="756" height="110" alt="image" src="https://github.com/user-attachments/assets/440433be-59bb-4d91-acfc-299f19c4557f" />
 
 🚀 **Quick Start**
 - Launch the application
