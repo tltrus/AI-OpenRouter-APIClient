@@ -48,6 +48,7 @@ Customization
 - Customize UI styles in XAML files
 
 📁 Project Structure
+
 <img width="482" height="328" alt="image" src="https://github.com/user-attachments/assets/6c0ded89-ac7e-449a-b11c-6e8438d8c213" />
 
 💡 Usage Tips
@@ -57,30 +58,9 @@ Customization
 - Lists: Use -, *, or + for bullet lists, 1. for numbered lists
 - Headers: Use ### for section headers
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-Fork the repository
-
-Create your feature branch (git checkout -b feature/AmazingFeature)
-
-Commit your changes (git commit -m 'Add some AmazingFeature')
-
-Push to the branch (git push origin feature/AmazingFeature)
-
-Open a Pull Request
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 🙏 Acknowledgments
-OpenRouter for providing API access to multiple AI models
-
-All AI model providers available through OpenRouter
-
-The WPF and .NET communities for excellent tools and libraries
-
-📞 Support
-For issues and feature requests, please use the GitHub Issues page.
+- OpenRouter for providing API access to multiple AI models
+- All AI model providers available through OpenRouter
+- The WPF and .NET communities for excellent tools and libraries
 
 Note: This application requires an internet connection and a valid OpenRouter API key. Some models may have usage limits or costs associated with them.
