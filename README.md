@@ -4,7 +4,7 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 
 <img width="839" height="598" alt="image" src="https://github.com/user-attachments/assets/0a4cead6-1c38-45ad-9f1e-9b30cda34c8f" />
 
-- Youtube:
+- Youtube: https://youtu.be/kEu75-2aZ0Y
 - Rutube: https://rutube.ru/video/7a3df9a5f099d1c1e66c25cff33009ff/
 
 ✨ **Features**
