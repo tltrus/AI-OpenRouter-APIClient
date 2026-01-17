@@ -24,9 +24,9 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 - **Async/Await**: Non-blocking API calls with cancellation support
 
 📦 **Installation**
-- Configure API Key
- - Get your API key from OpenRouter
- - Replace the API key in MainViewModel.cs
+- **Configure API Key**
+   - Get your API key from OpenRouter
+   - Replace the API key in MainViewModel.cs
 
 🚀 **Quick Start**
 - Launch the application
