@@ -4,6 +4,9 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 
 <img width="839" height="598" alt="image" src="https://github.com/user-attachments/assets/0a4cead6-1c38-45ad-9f1e-9b30cda34c8f" />
 
+- Youtube:
+- Rutube:
+
 ✨ **Features**
 - 🎯 **Multi-Model Support**: Access various AI models including free and paid options
 - 💬 **Real-time Chat**: Interactive chat interface with markdown formatting support
@@ -12,7 +15,6 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
    - Markdown support (headers, lists, bold, inline code)
    - Syntax-aware formatting with custom highlighter
 - ⚡ **Smart Input**: Send messages with Enter, new lines with Shift+Enter
-- 🔍 **Model Browser**: Filter models by provider, price, and capabilities
 - 📊 **Detailed Model Info**: View pricing, context length, and descriptions
 - 🚀 **Performance Optimized**: Pre-compiled regex, efficient text processing
 
