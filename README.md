@@ -8,9 +8,9 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 - 🎯 **Multi-Model Support**: Access various AI models including free and paid options
 - 💬 **Real-time Chat**: Interactive chat interface with markdown formatting support
 - 📝 **Rich Text Display**: Beautifully formatted responses with:
--- Code highlighting for C#, Python, JavaScript
--- Markdown support (headers, lists, bold, inline code)
--- Syntax-aware formatting with custom highlighter
+ - Code highlighting for C#, Python, JavaScript
+ - Markdown support (headers, lists, bold, inline code)
+ - Syntax-aware formatting with custom highlighter
 - ⚡ **Smart Input**: Send messages with Enter, new lines with Shift+Enter
 - 🔍 **Model Browser**: Filter models by provider, price, and capabilities
 - 📊 **Detailed Model Info**: View pricing, context length, and descriptions
@@ -25,8 +25,8 @@ A modern, feature-rich WPF desktop application for interacting with AI models th
 
 📦 **Installation**
 - Configure API Key
--- Get your API key from OpenRouter
--- Replace the API key in MainViewModel.cs
+ - Get your API key from OpenRouter
+ - Replace the API key in MainViewModel.cs
 
 🚀 **Quick Start**
 - Launch the application
